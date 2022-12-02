@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous"
+  />
+  <title>Ticket Tracker</title>
+</head>
+
+<body>
+  <section class="container">
+    <h1>Ticket Tracking System</h1>
+    <section class="jumbotron">
+      <h3>Add New Issue:</h3>
+      <form action="/new" id="issueInputForm" method="POST">
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <input
+            type="text"
+            class="form-control"
+            id="subject"
+            placeholder="Issue Subject..."
+            name="subject"
+          />
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            id="description"
+            placeholder="Issue Description..."
+            name="description"
+          />
+        </div>
+        <div class="form-group">
+          <label for="severity">Severity</label>
+          <select
+            type="select"
+            class="form-control"
+            id="severity"
+            name="severity"
+          >
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="assignedTo">Person Assigned</label>
+          <input
+            type="text"
+            class="form-control"
+            id="assignedTo"
+            placeholder="Enter Person Responsible..."
+            name="assignedTo"
+          />
+        </div>
+        <button type="submit" class="btn btn-info">Add</button>
+      </form>
+    </section>
+
+    <section class="row">
+      <div class="col-lg-12">
+        <div id="issuesList"></div>
+        <% ticketList.forEach(tickets => { %>
+        <div class="well">
+          <h6>Issue ID: <%= tickets._id %></h6>
+          <p>
+            <span
+              class="label <%= tickets.status == 'Closed' ? 'label-success' : 'label-danger' %>"
+              ><%=tickets.status%></span
+            >
+          </p>
+          <h3><%= tickets.subject %></h3>
+          <p><%= tickets.description %></p>
+          <p>
+            <span
+              class="glyphicon glyphicon-time"
+              style="margin-right: 5px"
+            ></span
+            ><%= tickets.severity%>
+            <span
+              class="glyphicon glyphicon-user"
+              style="margin-right: 5px"
+            ></span
+            ><%= tickets.assignedTo %>
+          </p>
+          <% if(tickets.status == 'Open') { %>
+          <a href="/edit/close/<%= tickets._id %>" class="btn btn-warning"
+            >Close</a
+          >
+          <% } else { %>
+          <a href="/edit/reopen/<%= tickets._id %>" class="btn btn-info"
+            >Reopen</a
+          >
+          <% } %>
+          <a href="/edit/remove/<%= tickets._id %>" class="btn btn-danger"
+            >Delete</a
+          >
+        </div>
+        <% }) %>
+      </div>
+    </section>
+  </section>
+</body>
