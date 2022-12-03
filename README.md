@@ -7,7 +7,7 @@ This project is a ticket tracking system for helpdesk ticket management
 
 **Tech used:** HTML, CSS, JavaScript, Bootstrap, EJS, MongoDB
 
-This app takes in client input and stores the ticket form input data to MongoDB to track helpdesk tickets. Once tickets are given a unique ID they are listed below the form to be worked on. Helpdesk mamagers can close and reopen specific tickets as they are worked on.
+This app takes in client input and stores the ticket form input data to MongoDB to track helpdesk tickets. Once tickets are given a unique ID they are listed below the form to be worked on. Helpdesk managers can close and reopen specific tickets as they are worked on.
 
 ## Optimizations
 
